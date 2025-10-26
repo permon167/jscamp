@@ -32,6 +32,33 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+select {
+  padding: 0.625rem 1.25rem;
+  background-color: #242d3a;
+  border: 0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 2.5rem;
+  margin-right: 0.5rem;
+
+  &:hover {
+    background-color: var(--primary-hover);
+    color: white;
+  }
+
+  &:focus {
+    outline: 2px solid #1173d4;
+    outline-offset: 2px;
+  }
+}
+
 body {
   font-family: system-ui;
   background-color: var(--background);
@@ -195,7 +222,6 @@ button {
   font-family: inherit;
   font-size: 1rem;
   white-space: nowrap;
-
   &:hover, /* pseudo-clase que significa que el ratón está encima */
   &:focus {
     /* pseudo-clase que significa que el elemento tiene el foco */
@@ -210,6 +236,15 @@ button {
 
   &:disabled {
     opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.button-apply-job {
+  background: #09f;
+
+  &.is-applied {
+    background: #4caf50;
     pointer-events: none;
   }
 }
@@ -260,32 +295,6 @@ main > section:nth-child(2) footer {
   gap: 16px;
 }
 
-/* Feature Cards */
-/* article {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  margin-bottom: 16px;
-  border-radius: 0.5rem;                   
-  box-shadow: 0px 1px 3px 0 var(--shadow); 
-
-  svg {
-    color: var(--primary-light);          
-    background: rgba(0, 153, 255, 0.3);  
-    border-radius: 9999px;               
-    width: 64px;                         
-    height: 64px;                        
-    padding: 16px;                       
-  }
-
-  h3 {
-    font-weight: 500;
-  }
-
-  p {
-    color: var(--text-muted);
-  }
-} */
-
 /* Footer */
 footer {
   background-color: var(--background);
@@ -324,16 +333,49 @@ article {
   }
 }
 
+/* Jobs Search */
 .jobs-search {
   margin: 0;
   padding: 0;
-  height: auto !important; /* Determina el metodo por defecto cuando se repiten por el titulo */
-}
+  height: auto !important;
 
-.search-filters {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .search-bar {
+    background: var(--input-bg);
+    padding: 0.25rem 0.5rem;
+    button {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  form {
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  form div {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
 }
 
 /* .jobs-listings {
@@ -354,8 +396,37 @@ article {
 } */
 
 .jobs-listings {
-  max-width: 800px;
-  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+
+  .job-listing-card {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 0;
+
+    display: flex; /* valor original */
+    align-items: start;
+    gap: 1rem;
+
+    &.is-hidden {
+      display: none;
+    }
+
+    small {
+      font-size: 0.875rem;
+      opacity: 0.75;
+    }
+
+    p {
+      margin-top: 0.5rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
 .resultado {
@@ -389,21 +460,6 @@ article {
   line-height: 1.4;
 }
 
-.btn-aplicar {
-  float: right;
-  background-color: #238636;
-  border: none;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-aplicar:hover {
-  background-color: #2ea043;
-}
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -434,6 +490,21 @@ article {
   }
 }
 
+/* .btn-aplicar {
+  float: right;
+  background-color: #238636;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-aplicar:hover {
+  background-color: #2ea043;
+}
+
 .btn-aplicar {
   background: #09f;
   &.is-applied {
@@ -441,3 +512,4 @@ article {
     pointer-events: none;
   }
 }
+ */
