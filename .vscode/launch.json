@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "name": "http://127.0.0.1:3000/html-css/empleos.html?serverWindowId=2e83854a-d065-43d5-b504-51706819ca06",
+      "request": "launch",
+      "url": "http://127.0.0.1:3000/html-css/empleos.html?serverWindowId=2e83854a-d065-43d5-b504-51706819ca06"
+    }
+  ]
+}
