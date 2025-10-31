@@ -20,9 +20,16 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const jobsFilteredByFilters = jobsData.filter((job) => {
-    return (
-      filters.technology === "" || job.data.tecnologia === filters.technology
-    );
+    const techMatch =
+      !filters.technology || job.data.tecnologia === filters.technology;
+
+    const locationMatch =
+      !filters.location || job.data.modalidad === filters.location;
+
+    const levelMatch =
+      !filters.experienceLevel || job.data.nivel === filters.experienceLevel;
+
+    return techMatch && locationMatch && levelMatch;
   });
 
   const jobsWithTextFilter =

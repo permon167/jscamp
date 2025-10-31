@@ -58,7 +58,10 @@ export function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
           data-page={page}
           href="#"
           className={currentPage === page ? styles.isActive : ""}
-          onClick={handleChangePage}
+          onClick={(event) => {
+            event.preventDefault();
+            handleChangePage(event, page);
+          }}
         >
           {page}
         </a>

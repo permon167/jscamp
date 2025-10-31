@@ -1,10 +1,27 @@
-import { useId } from "react";
+import { useId, useState, useEffect } from "react";
 
 export function SearchFormSection({ onTextFilter, onSearch }) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
   const idExperience = useId();
+
+  const [filters, setFilters] = useState({
+    technology: "",
+    location: "",
+    experienceLevel: "",
+  });
+
+  useEffect(() => {
+    onSearch(filters);
+  }, [filters]);
+
+  const handleSelectChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,7 +76,11 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
 
         {/* Apartado Filtros */}
         <div className="search-filters">
-          <select name={idTechnology} id="filter-technology">
+          <select
+            name="technology"
+            id={idTechnology} // EL ID identifica con el useID
+            onChange={handleSelectChange} //Cada cambio del filtro se refleja en las ofertas
+          >
             <option value="">Tecnología</option>
             <option value="javascript">JavaScript</option>
             <option value="python">Python</option>
@@ -69,7 +90,7 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
             <option value="mobile">Mobile</option>
           </select>
 
-          <select name={idLocation} id="filter-location">
+          <select name="location" id={idLocation} onChange={handleSelectChange}>
             <option value="">Ubicación</option>
             <option value="remoto">Remoto</option>
             <option value="cdmx">Ciudad de México</option>
@@ -78,7 +99,11 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
             <option value="barcelona">Barcelona</option>
           </select>
 
-          <select name={idExperience} id="filter-experience-level">
+          <select
+            name="experienceLevel"
+            id={idExperience}
+            onChange={handleSelectChange}
+          >
             <option value="">Nivel de experiencia</option>
             <option value="junior">Junior</option>
             <option value="mid-level">Mid-level</option>
