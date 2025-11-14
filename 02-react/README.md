@@ -14,3 +14,19 @@ The React Compiler is currently not compatible with SWC. See [this issue](https:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Desplegar proyecto
+
+Iniciamos con terminal: desde la raiz del proyecto "npm run dev".
+
+## Explicación del funcionamiento:
+
+El archivo raiz es el _main.jsx_ en el cual importamos el App.jsx, index.css. Con el createRoot hacemos un render de la App.
+
+En _App.jsx_ importamos todas las secciones que forman la App y el json que contiene los datos.
+
+Dentro de los archivos react ".jxs" escribimos primero en JavaScript y despues en HTML dentro del mismo fichero.
+
+## Modulación con CSS
+
+Tengo un archivo _Pagination.jsx_ para la paginacion de la web, pero hago un modulo css para diferenciar los estilos que uso para esta clase (Paginacion) del resto de estilos de la web del index.css
