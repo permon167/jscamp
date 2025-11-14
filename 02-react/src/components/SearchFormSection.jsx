@@ -1,5 +1,37 @@
 import { useId, useState, useEffect } from "react";
 
+//Custom Hook para manejar el formulario de búsqueda
+const useSearchForm = ({
+  idTechnology,
+  idLocation,
+  idExperience,
+  idText,
+  onTextFilter,
+  onSearch,
+}) => {
+  const [searchText, setSearchText] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const filters = {
+      search: formData.get(idText),
+      technology: formData.get(idTechnology),
+      location: formData.get(idLocation),
+      experienceLevel: formData.get(idExperience),
+    };
+    onSearch(filters);
+  };
+
+  const handleTextChange = (event) => {
+    const text = event.target.value;
+    setSearchText(text);
+    onTextFilter(text);
+  };
+
+  return { searchText, handleSubmit, handleTextChange };
+};
+
+// Componente principal del formulario de búsqueda
 export function SearchFormSection({ onTextFilter, onSearch }) {
   const idText = useId();
   const idTechnology = useId();
@@ -23,29 +55,21 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const filters = {
-      search: formData.get(idText),
-      technology: formData.get(idTechnology),
-      location: formData.get(idLocation),
-      experienceLevel: formData.get(idExperience),
-    };
-    onSearch(filters);
-  };
-
-  const handleTextChange = (event) => {
-    const text = event.target.value;
-    onTextFilter(text);
-  };
+  const { searchText, handleSubmit, handleTextChange } = useSearchForm({
+    idTechnology,
+    idLocation,
+    idExperience,
+    idText,
+    onTextFilter,
+    onSearch,
+  });
 
   return (
     <section className="jobs-search">
       <h1>Encuentra tu próximo trabajo</h1>
       <p>Explora miles de oportunidades en el sector tecnologico</p>
 
-      <form onSubmit={handleSubmit} id="empleos-search-form" role="search">
+      <form onChange={handleSubmit} id="empleos-search-form" role="search">
         <div className="search-bar">
           <svg
             xmlns="http://www.w3.org/2000/svg"
