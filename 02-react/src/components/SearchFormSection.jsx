@@ -1,5 +1,6 @@
 import { useId, useState, useEffect } from "react";
 
+let timeoutId = null;
 //Custom Hook para manejar el formulario de búsqueda
 const useSearchForm = ({
   idTechnology,
@@ -10,9 +11,16 @@ const useSearchForm = ({
   onSearch,
 }) => {
   const [searchText, setSearchText] = useState("");
+
+  //Manejador del evento submit del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+
+    if (event.target.name === idText) {
+      return; //Si el cambio viene del campo de texto, no hacemos nada aquí porque ya se maneja en handleTextChange
+    }
+
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
@@ -22,10 +30,18 @@ const useSearchForm = ({
     onSearch(filters);
   };
 
+  //Manejador del evento change del campo de texto
   const handleTextChange = (event) => {
     const text = event.target.value;
-    setSearchText(text);
-    onTextFilter(text);
+    setSearchText(text); //actualizamos el estado del texto de búsqueda
+    //DEBOUNCE: esperamos 500ms después de que el usuario deje de escribir para llamar a onTextFilter
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+      onTextFilter(text);
+    }, 500);
   };
 
   return { searchText, handleSubmit, handleTextChange };
