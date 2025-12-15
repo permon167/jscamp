@@ -23,9 +23,13 @@ Iniciamos con terminal: desde la raiz del proyecto "npm run dev".
 
 El archivo raiz es el _main.jsx_ en el cual importamos el App.jsx, index.css. Con el createRoot hacemos un render de la App.
 
-En _App.jsx_ importamos todas las secciones que forman la App y el json que contiene los datos.
+El componente principal de la aplicacion: _App.jsx_ donde importamos y renderizamos todos los componentes que forman la App:
 
-Dentro de los archivos react ".jxs" escribimos primero en JavaScript y despues en HTML dentro del mismo fichero.
+- Header
+- Route: navegacion entre rutas
+- Footer
+
+Dentro de los archivos react ".jxs" escribimos primero en JavaScript y despues en una especie de HTML dentro del mismo fichero.
 
 ## Modulación con CSS
 
