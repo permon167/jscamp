@@ -34,12 +34,14 @@ export function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
     if (page !== currentPage) onPageChange(page);
   };
 
+  // Construir la URL para una página dada manteniendo otros parámetros de consulta
   const buildPageUrl = (page) => {
     const url = new URL(window.location);
     url.searchParams.set("page", page);
     return `${url.pathname}?${url.searchParams.toString()}`;
   };
 
+  // Renderizar la paginación
   return (
     <nav className={styles.pagination}>
       <a

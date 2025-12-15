@@ -54,6 +54,7 @@ const useFilters = () => {
 
         const queryParams = params.toString();
 
+        // Usamos fetch para obtener los datos de empleos desde la API
         const response = await fetch(
           `https://jscamp-api.vercel.app/api/jobs?${queryParams}`
         );
