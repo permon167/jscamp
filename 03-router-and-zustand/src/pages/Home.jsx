@@ -1,0 +1,100 @@
+import { useRouter } from "../hooks/useRouter.jsx";
+
+export function HomePage() {
+  const { navigateTo } = useRouter();
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const searchTerm = formData.get("search");
+    const url = searchTerm
+      ? `/search?text=${encodeURIComponent(searchTerm)}`
+      : "/search";
+    navigateTo(url);
+  };
+
+  return (
+    <main>
+      <section>
+        <img src="./background.webp" width="200" />
+        <h1>Encuentra tu trabajo ideal en el mundo del desarrollo</h1>
+        <p>Explora oportunidades laborales en desarrollo web, móvil y más.</p>
+
+        <form role="search" onSubmit={handleSearch}>
+          <div>
+            {/* Icono de búsqueda (lo sacamos de una pagina de iconos) */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+              <path d="M21 21l-6 -6" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Buscar empleos por título, tecnología o empresa"
+            />
+            <button type="submit">Buscar</button>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <header>
+          <h2>¿Por que DevJobs?</h2>
+          <p>
+            En DevJobs, nos especializamos en conectar a los mejores talentos
+            con las empresas más innovadoras. Nuestro enfoque en el desarrollo
+            tecnológico nos permite ofrecer oportunidades laborales de alta
+            calidad en un mercado en constante evolución.
+          </p>
+        </header>
+
+        <footer>
+          <article>
+            <svg
+              fill="currentColor"
+              height="32"
+              viewBox="0 0 256 256"
+              width="32"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path>
+            </svg>
+            <h3>Oportunidades Diversas</h3>
+            <p>
+              Desde startups hasta grandes corporaciones, tenemos ofertas de
+              trabajo para todos los niveles y especializaciones en desarrollo.
+            </p>
+          </article>
+          <article>
+            <svg
+              fill="currentColor"
+              height="32"
+              viewBox="0 0 256 256"
+              width="32"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+            </svg>
+            <h3>Recursos para Desarrolladores</h3>
+            <p>
+              Accede a artículos, tutoriales y eventos que te ayudarán a crecer
+              en tu carrera profesional.
+            </p>
+          </article>
+        </footer>
+      </section>
+    </main>
+  );
+}
