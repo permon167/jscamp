@@ -490,6 +490,15 @@ article {
   }
 }
 
+/* Estilo para el enlace activo en la navegación del Header */
+.nav-link-active {
+  color: var(--primary);
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0.5;
+  user-select: none;
+}
+
 /* .btn-aplicar {
   float: right;
   background-color: #238636;
