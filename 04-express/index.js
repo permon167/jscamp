@@ -5,11 +5,24 @@ import jobs from "./jobs.json" with { type: "json" };
 
 const PORT = process.env.PORT ?? 3000;
 const app = express();
+
 const ACCEPTED_ORIGINS = [
   "http://localhost:3000",
   "http://permon",
   "http://localhost:5173",
 ];
+
+//Podriamos ver cookies de validacion, sesiones, etc, ahora solo controlamos el origen, aqui devolvemos la cabecera Access-Control-Allow-Origin
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || ACCEPTED_ORIGINS.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Origin not allowed by CORS"));
+    },
+  }),
+);
 
 app.use(express.json()); //middleware para parsear el body como json
 
@@ -35,6 +48,7 @@ app.get("/health", (req, res) => {
 
 //Idempotente - no importa cuantas veces se llame, el resultado sera el mismo, hace que cumple API REST
 app.get("/jobs", async (req, res) => {
+  //res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   const { text, tittle, level, limit = 10, technology, offset } = req.query;
   let filteredJobs = jobs;
 
@@ -48,8 +62,10 @@ app.get("/jobs", async (req, res) => {
   }
 
   if (technology) {
-    filteredJobs = filteredJobs.filter((job) =>
-      job.tecnologias.includes(technology),
+    filteredJobs = filteredJobs.filter(
+      (job) =>
+        Array.isArray(job.data?.technology) &&
+        job.data.technology.includes(technology),
     );
   }
 
